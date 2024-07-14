@@ -1,0 +1,18 @@
+c:\users\letziray\documents\visual studio 2013\Projects\Snake\Snake\bin\Debug\Snake.exe.config
+C:\Users\Letziray\documents\visual studio 2013\Projects\Snake\Snake\bin\Debug\Snake.exe
+C:\Users\Letziray\documents\visual studio 2013\Projects\Snake\Snake\bin\Debug\Snake.pdb
+C:\Users\Letziray\documents\visual studio 2013\Projects\Snake\Snake\obj\Debug\Snake.csprojResolveAssemblyReference.cache
+C:\Users\Letziray\documents\visual studio 2013\Projects\Snake\Snake\obj\Debug\Snake.Form1.resources
+C:\Users\Letziray\documents\visual studio 2013\Projects\Snake\Snake\obj\Debug\Snake.Properties.Resources.resources
+C:\Users\Letziray\documents\visual studio 2013\Projects\Snake\Snake\obj\Debug\Snake.csproj.GenerateResource.Cache
+C:\Users\Letziray\documents\visual studio 2013\Projects\Snake\Snake\obj\Debug\Snake.exe
+C:\Users\Letziray\documents\visual studio 2013\Projects\Snake\Snake\obj\Debug\Snake.pdb
+G:\Mio\Snake\Snake\Snake\bin\Debug\Snake.exe.config
+G:\Mio\Snake\Snake\Snake\bin\Debug\Snake.exe
+G:\Mio\Snake\Snake\Snake\bin\Debug\Snake.pdb
+G:\Mio\Snake\Snake\Snake\obj\Debug\Snake.csprojResolveAssemblyReference.cache
+G:\Mio\Snake\Snake\Snake\obj\Debug\Snake.Form1.resources
+G:\Mio\Snake\Snake\Snake\obj\Debug\Snake.Properties.Resources.resources
+G:\Mio\Snake\Snake\Snake\obj\Debug\Snake.csproj.GenerateResource.Cache
+G:\Mio\Snake\Snake\Snake\obj\Debug\Snake.exe
+G:\Mio\Snake\Snake\Snake\obj\Debug\Snake.pdb

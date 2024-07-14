@@ -1,0 +1,585 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>CANVAS</title>
+	<link rel=stylesheet href="css/estilo2.css" type="text/css"/>
+	<style type="text/css">
+	#contenedor{
+		position:relative;
+		height:346px;
+		margin-top:19px;
+	}
+	#parte1{
+		position:absolute;
+		width:520px;
+		left:35px;
+	}
+	#parte2{
+		position:absolute;
+		left:560px;
+		right:70px;
+	}
+	#interrogante{
+		font-family:OpenSans;
+		font-weight:bold;
+		font-size:23px;
+	}
+	.resalte_67{
+		font-family:font1_negrita;
+		font-size:26px;
+		font-weight:bold;
+		margin-top:21px;
+		margin-bottom:18px;
+		padding-left:20px;
+		clear:both;
+	}
+	#im_67{
+		float:left;
+		margin-right:18px;
+		margin-bottom:26px;
+	}
+	#codigo_corto{
+		font-family:programacion;
+		width:472px;
+		font-size:15px;
+		color:#3e332f;
+		padding:1px 0px 1px 35px;
+		border-radius:14px;
+		background-color:rgba(255,255,255,0.7);
+		margin-top:17px;
+		margin-bottom:20px;
+}
+	</style>
+	<script src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript">
+		var x=$("document");
+		x.ready(inicio);
+		
+		function inicio(){
+			var f = new Date();
+			var v="t5_canvas - "+localStorage.usuario_mooc+" > "+(f.getDate() + "/" + (f.getMonth() +1)) + " a las "+f.getHours()+":"+f.getMinutes()+":"+f.getSeconds();
+			$.get("registro_entrada.php",{dato:v});
+		}
+	</script>
+	 
+ 
+	
+</head>
+
+<body>
+<div id="franja_superior">
+</div>
+
+<header>
+	<div id="logos_cortados1"><img src="img_html/logos_cortados1.png"></div>
+	<div id="cabecera">
+		Canvas<br>
+		<span style="font-size:26px; color:#CADBEE">Profesor: Javier López</span>
+	</div>
+		<div id="volver">
+			<a href="index.html">Volver</a>
+	  	</div>
+</header>
+
+
+<div id="indice">
+<div id="titulo_indice_contenido"><img src="img_html/indice_cortado.png" width="100px"></div>
+<div id="lista">
+	<li>
+	<a id="p1" href="#punto1">¿Qué es el elemento CANVAS?</a></li>
+
+	<li>
+	<a id="p1" href="#punto2">Varios ejemplos simples</a></li>
+
+	<li>
+	<a id="p1" href="#punto3">Las palabras mágicas</a></li>
+
+	<li>
+	<a id="p1" href="#punto4">Un truco útil</a></li>
+</div>	
+</div>
+
+	
+	
+
+<section id="contingut">	
+<p id="punto1"></p>
+<div id="titulillo">
+¿Qué es el elemento CANVAS?
+</div>
+
+		A través del elemento CANVAS (que traducido al español sería '<b>lienzo</b>') podemos crear imágenes sencillas o complejas creadas de forma dinámica o a través de la interacción con el usuario. Cabe decir que dichas imágenes no son vectoriales (como ocurre con las imágenes SVG) y que se crean utilizando una base sencilla de JavaScript.<br><br>
+		Una de las cosas fundamentales para entender cómo funciona CANVAS es tener claro que existen <b>DOS partes</b> muy diferenciadas. Una donde se crea y ubica el lienzo (vacío) dentro del &lt;body&gt; (en el lugar del html donde tenga que estar ubidado el dibujo) y otra parte que será donde se dibuja (normalmente al final del html, para facilitar la lectura global).<br><br>
+		
+		Vamos a intentar dibujar el siguiente dibujo básico con CANVAS:<br>
+
+<div id="contenedor">
+	<div id="parte1">
+		<canvas id="mi_lienzo" width="500" height="300" style="border: 1px solid #4563B5">;
+			<p>¿Qué haces intentando visualizar este contenido de un curso perteneciente a HTML5 con un navegador más antiguo que la barca de Noé?</p>
+		</canvas>
+	</div>
+	<div id="parte2">
+	Este sencillo dibujo está compuesto por varios elementos en los que se utilizan:<br>
+	<ul>
+	-Rectángulos (1 para el cielo).<br>
+	-1 rectángulo con degradado (para el mar)<br>
+	-Múltiples arcos o círculos (8 para las nubes, 1 para el sol y 2 para la isla)<br>
+	-Varias líneas (8 para el barco, 4 para el mastil y 3 para la vela)<br>
+	-Colores transparentes para la vela y las nubes.
+	</ul>
+	</div>
+</div>
+
+
+<p id="punto2"></p>
+<div id="titulillo">
+Paso a paso
+</div>
+<div id ="titulo_peque">1. Creación del lienzo</div>
+Lo primero que vamos a hacer es crear el lienzo (vacio), indicando un nombre, unas dimensiones (expresadas en píxeles), grosor y color del borde que rodeará al lienzo.
+<div class="codigo">
+<pre>
+ &lt;canvas id="lienzo" width="500" height="300" style="border:1px solid blue"&gt;;
+ &lt;/canvas&gt;
+</pre>
+</div>
+
+Aunque el código anterior es totalmente válido, tendríamos que añadir algo de código extra para contemplar aquellos navegadores que no soportan CANVAS. Así, todo lo que escribamos entre &lt;canvas&gt; y &lt;/canvas&gt; será interpretado por este tipo de navegadores.
+<div class="codigo">
+<pre>
+ &lt;canvas id="lienzo" width="500" height="300" style="border:1px solid blue"&gt;;
+   <span style="color:red">&lt;p&gt;Tu navegador no soporta CANVAS. Deberías actualizar tu navegador&lt/p&gt;
+   &lt;img src="imagen_falsa.png"&gt;</span>
+ &lt;/canvas&gt;
+</pre>
+</div>
+ Así, si un navegador -como Internet Explorer 8- accede a esta página se visualizaría el mensaje que está entre &lt;p&gt; y &lt;/p&gt;, además de mostrar la "imagen_falsa.png" (que sustituiría a la imagen generada con CANVAS) y que NO sería  mostrada por los navegadores que soportan CANVAS.<br><br>
+ 
+
+
+<div id ="titulo_peque">2. Dibujar</div>
+Para dibujar dentro de este CANVAS vamos a crear el código correspondiente AL FINAL del todo el html (incluso después de la etiqueta &lt;/html&gt; final), quedando el código de la siguiente manera:<br>
+<div class="codigo">
+<pre>
+ ...
+ &lt;/html&gt;
+ &lt;script type="text/javascript"&gt;
+   var hoja=document.getElementById("<span style="color:red">lienzo</span>");
+   var dibujo=hoja.getContext("2d");
+   /*Aquí escribiremos TODAS las órdenes que nos permiten dibujar dentro del CANVAS*/
+ &lt;/script&gt;
+</pre>
+</div>
+Estas 4 líneas, aunque seguramente te suenan a chino mandarín mezclado con Bacardí, son necesarias y aunque bastaría con decir que son un peaje necesario que hay que añadir, voy a intentar explicar su utilidad..<p>
+
+Las dos líneas que empiezan con "var" son necesarias para configurar (crear) el área de dibujo, teniendo en cuenta que en el primer 'var' tenemos que indicar el nombre de id del lienzo que hemos creado inicialmente, que en nuestro ejemplo ha sido <span style="color:red">lienzo</span>.<br><br>
+
+Cuando añadamos código y lo queramos ir probando, deberemos ir sustituyendo la línea del código anterior, es decir:<br>
+<div class="codigo">
+<pre>
+/*Aquí escribiremos TODAS las órdenes que nos permiten dibujar dentro del CANVAS*/
+</pre>
+</div>
+..por el código que vayamos construyendo a continuación.<br><br>
+
+Como ir enumerando etiqueta por etiqueta del CANVAS puede ser más mortifero que un largometraje sueco vamos a ir construyendo el dibujo del inicio y vamos a ir comentando las etiquetas que se vayan utilizando.
+
+
+
+
+
+<div class="resalte_67">
+Dibujando el Cielo
+</div>
+
+Vamos a empezar a crear el elemento que se colocará más al fondo, osea, el cielo..<br>
+Para ello, primero definiremos un color azul (código hexadecimal: #B5CDFF) y<br>
+posteriormente crearemos un rectángulo de ese color:
+<div id="codigo_corto">
+<pre>
+lienzo.fillStyle="#B5CDFF";
+lienzo.fillRect(0,0,500,300);
+</pre>
+</div>
+
+<img id="im_67" src="img_html/canvas1.png" align="top"><br>
+<b>fillStyle (color)</b> sirve para definir el color del relleno que se creará a partir de ese momento. <p>
+<b>fillRect (x, y, alto, ancho)</b> crea un rectángulo (del color especificado con fillStyle).<br><br>En este ejemplo, se indica donde empezará a dibujar (0px/0px) y seguidamente se indica el ancho y alto (en píxeles) (500px/300px), que son precisamente las dimensiones totales del lienzo.
+
+
+
+
+
+
+<div class="resalte_67">
+Dibujando el Sol
+</div>
+
+El siguiente elemento a dibujar será el que se encuentre apilado encima del último<br>
+elemento creado (el cielo), que en este caso será el sol.<br>
+Aunque el sol sea un simple círculo amarillo necesitaremos 5 etiquetas para dibujarlo.<br>
+
+<div id="codigo_corto">
+<pre>
+lienzo.fillStyle="#F8FF5A";
+lienzo.beginPath();
+lienzo.arc(290,130,54,0,Math.PI*2,true);
+lienzo.closePath;
+lienzo.fill();
+</pre>
+</div>
+
+<img id="im_67" src="img_html/canvas2.png"><br>
+<b>fillStyle (color)</b> sirve para definir el color del relleno que se creará a partir de ese momento. <p>
+<b>beginPath()</b> indica en qué punto se empezará a dibujar una forma.<br>
+Todas las etiquetas que se encuentren entre este beginPath y un closePath final serán las que compogan esta forma sin levantar el pincel del lienzo.<p>
+<b>arc (x, y, radio, ángulo inicial, ángulo final, sentido)</b> dibuja un arco o círculo. Los parámetros que utiliza son: los dos primeros se corresponden con las coordenadas horizontal y vertical, seguido del radio, el ángulo inicial y final, y finalmente el sentido o dirección (true en el sentido de las agujas del reloj o false para el sentido contrario).<br>
+Para crar un círculo el ángulo inicial será siempre 0 y el final se expresa con la fórmula Math.PI*2<p>
+<b>closepath</b> levanta el pincel del lienzo y por lo tanto se finaliza de dibujar la forma.<p>
+<b>fill()</b> colorea el dibujo y cierra las líneas si fuese necesario.
+
+
+
+<div class="resalte_67">
+Dibujando las Nubes
+</div>
+Las nubes se colocan por encima de lo dibujado hasta el momento, pero el mar<br>
+que se dibujará después las tapará por su parte inferior.<br>Las nubes están compuestas de múltiples círculos.
+<div id="codigo_corto">
+<pre>
+lienzo.fillStyle="rgba(232,236,247,0.5)";
+lienzo.beginPath();
+lienzo.arc(10,200,80,0,Math.PI*2, true);
+lienzo.arc(88,220,46,0,Math.PI*2, true);
+lienzo.arc(154,199,30,0,Math.PI*2, true);
+lienzo.arc(232,210,62,0,Math.PI*2, true);
+lienzo.arc(320,205,25,0,Math.PI*2, true);
+lienzo.arc(380,200,44,0,Math.PI*2, true);
+lienzo.arc(442,208,23,0,Math.PI*2, true);
+lienzo.arc(498,200,41,0,Math.PI*2, true);
+lienzo.closePath;
+lienzo.fill();
+</pre>
+</div>
+
+<img id="im_67" src="img_html/canvas3.png"><br>
+Se utilizan exactamente las mismas etiquetas y en el mismo orden que la forma anterior, tan solo con una pequeña diferencia:<p>
+Con <b>fillStyle="rgba(rojo, verde, azul, transparencia)"</b> se utiliza un color de tipo rgba. Especificando así el color, es posible definir el color con transparencia del relleno (en este caso 0.5, osea un 50% de transparencia). <p>
+
+
+
+
+
+
+
+<div class="resalte_67">
+Dibujando el Mar
+</div>
+El mar tapa parte de las nubes y será creado con un rectángulo (fillRect) al que se<br>
+le ha aplicado como color de relleno (fillStyle) de un color de degradado lineal que<br>
+se ha definido previamente.
+<div id="codigo_corto">
+<pre>
+var gr=mi_dibujo.createLinearGradient(0,200,0,280);
+gr.addColorStop(0,"#D3DEF3");
+gr.addColorStop(1,"#0628A4");
+mi_dibujo.fillStyle=gr;
+mi_dibujo.fillRect(0,200,500,300);
+</pre>
+</div>
+
+<img id="im_67" src="img_html/canvas4.png">
+Para dibujar un degradado lineal, primero con <b>createLinearGradient</b> creamos el documento que definirá cómo tiene que ser el degradado, que se llamará gr. Los 4 datos que necesita son: la coordenada horizontal (0) y vertical (200) desde donde se empezará a aplicar el degradado y seguidamente la coordenada horizontal y vertical hasta dónde llegará el degradado (siempre: del espacio donde se aplique este degradado).<br>
+Como el degradado tiene que ser vertical, la coordenada horizontal se queda igual (0) y únicamente variamos la cantidad vertical. En este caso, el 280 indica que únicamente se aplicará el degradado de color desde la coordenada vertical 200 a la 280, quedando el resto de la superficie que quede de un color plano.<p>
+Con <b>addColorStop (orden, color)</b> vamos añadiendo colores del degradado.<p>
+<b>fillStyle</b> aplica como color de relleno el degradado llamado 'gr'.<p>
+<b>fillRect</b> define el espacio (el rectángulo) al que se aplicará el degradado.<br>
+Como el rectángulo empieza en las mismas coordenadas que 'gr' (0,200) el degradado empezará en la parte superior del rectángulo. Como el rectángulo tiene una altura de 300px y el degradado de 280px, de la coordenada 280 a la 300 el color será plano.
+
+
+
+
+<div class="resalte_67">
+Dibujando el Casco del barco
+</div>
+Para crear formas que no son rectángulos ni círculos se utilizan etiquetas propias<br>
+de creación de líneas, que cuando se cierran es posible rellenar de color o dibujar<br>
+sus líneas de contorno.
+<div id="codigo_corto">
+<pre>
+mi_dibujo.beginPath();
+mi_dibujo.fillStyle="#656652";
+mi_dibujo.strokeStyle="#3C3F09"
+mi_dibujo.moveTo(300,219);
+mi_dibujo.lineTo(360,219);
+mi_dibujo.lineTo(368,203);
+mi_dibujo.lineTo(296,206);
+mi_dibujo.lineTo(300,219);
+mi_dibujo.closePath;
+mi_dibujo.stroke();
+mi_dibujo.fill();
+</pre>
+</div>
+
+<img id="im_67" src="img_html/canvas5.png"><br>
+Con <b>beginPath()</b> indicamos que empezamos a dibujar sin levantar el pincel del lienzo (hasta que se encuentre un closePath).<p>
+<b>fillStyle (color)</b> define el color de relleno.<p>
+<b>strokeStyle (color)</b> define el color del trazo.<p>
+Con <b>moveTo</b> movemos el puntero del pincel a un lugar determinado del lienzo (sin pintar).<p>
+Utilizando <b>lineTo (x, y)</b> vamos creando líneas rectas (desde el punto anterior hasta las coordenadas especificadas).<p>
+<b>closePath</b> levanta el pincel del lienzo y finaliza la forma.<p>
+<b>stroke()</b> dibuja el trazo o las lineas de la forma con el color especificado con strokeStyle.<p>
+<b>fill()</b> dibuja el color de relleno especificado con fillStyle.<p>
+
+
+
+
+
+
+<div class="resalte_67">
+Dibujando la Quilla del barco
+</div>
+
+Es la misma forma básica del casco del barco, pero abarcando únicamente la<br>
+parte baja del mismo con un color más oscuro.
+<div id="codigo_corto">
+<pre>
+mi_dibujo.beginPath();
+mi_dibujo.fillStyle="#3C3F09";
+mi_dibujo.beginPath();
+mi_dibujo.moveTo(300,219);
+mi_dibujo.lineTo(360,219);
+mi_dibujo.lineTo(364,212);
+mi_dibujo.lineTo(298,214);
+mi_dibujo.lineTo(300,219);
+mi_dibujo.fill();
+</pre>
+</div>
+
+<img id="im_67" src="img_html/canvas6.png"><br>
+Se utilizan exactamente las mismas etiquetas y en el mismo orden que en la forma anterior.
+
+
+
+
+
+<div class="resalte_67">
+Dibujando el Mástil del barco
+</div>
+
+<div id="codigo_corto">
+<pre>
+mi_dibujo.fillStyle="#867048";
+mi_dibujo.beginPath();
+mi_dibujo.moveTo(314,205);
+mi_dibujo.lineTo(330,101);
+mi_dibujo.lineTo(334,103);
+mi_dibujo.lineTo(322,204);
+mi_dibujo.fill();
+</pre>
+</div>
+
+<img id="im_67" src="img_html/canvas7.png"><br>
+Se utilizan exactamente las mismas etiquetas y en el mismo orden que en la forma anterior.
+
+
+
+
+<div class="resalte_67">
+Dibujando la Vela del barco
+</div>
+Para la creación de la vela se utiliza un color de relleno de tipo rgba para poder<br>
+indicar un grado de transparencia.
+<div id="codigo_corto">
+<pre>
+mi_dibujo.fillStyle="rgba(210,151,50,0.6)";
+mi_dibujo.beginPath();
+mi_dibujo.moveTo(333,105);
+mi_dibujo.lineTo(378,194);
+mi_dibujo.lineTo(322,188);
+mi_dibujo.lineTo(333,105);
+mi_dibujo.closePath;
+mi_dibujo.fill();
+</pre>
+</div>
+
+<img id="im_67" src="img_html/canvas8.png"><br>
+Se utilizan exactamente las mismas etiquetas y en el mismo orden que en la forma anterior.
+
+
+
+
+
+
+<div class="resalte_67">
+Dibujando la Isla
+</div>
+
+<div id="codigo_corto">
+<pre>
+mi_dibujo.fillStyle="#2E7B10";
+mi_dibujo.beginPath();
+mi_dibujo.arc(100,250,45,-0.3,Math.PI*1.1, true);
+mi_dibujo.arc(135,246,33,-0.3,Math.PI*1.1, true);
+mi_dibujo.closePath;
+mi_dibujo.fill();
+</pre>
+</div>
+
+<img id="im_67" src="img_html/canvas9.png"><br>
+En el caso de la isla se ha optado por dibujar dos círculos partidos por casi la mitad variando sus valores de ángulo inicial y ángulo final. <p>
+Así:<br>
+<b>arc (x, y, radio, ángulo inicial, ángulo final, sentido)</b><p>
+En 'ángulo inicial' se ha especificado -0.3 para que corte el círculo 3 grados por encima desde el centro del círculo.<br>
+Para que el final del contorno del círculo no dé una vuelta entera (que sería multiplicando x 2) y queremos que da un poquito más de media vuelta especificamos 1.1 en la multiplicación por PI.<p>
+Vamos a probar diferentes valores para:<p>
+
+mi_dibujo.arc(100, 250, 45, <b>-0.3</b>, <b>Math.PI*1.1</b>, true);<p>
+
+Que corresponde al primer semicirculo que forma la isla: <img src="img_html/isla5.PNG" align="center">
+<br><br><br>
+
+
+
+<img id="im_67"src="img_html/isla1.PNG" align="center"><br>
+Así, si el código tubiese los valores <b>0</b>, y <b>Math.PI*2</b> crearíamos un círculo perfecto:<br>
+mi_dibujo.arc(100, 250, 45, <b>0</b>, <b>Math.PI*2</b>, true);<br><br><br><br><br>
+
+
+<img id="im_67" src="img_html/isla2.PNG" align="center">
+Si modificamos el valor del ángulo final a <b>Math.PI*1</b> crearíamos un semicírculo perfecto:<br>
+mi_dibujo.arc(100, 250, 45, 0, <b>Math.PI*1</b>, true);<br><br><br><br>
+
+<img id="im_67" src="img_html/isla3.PNG" align="center">
+Si modificamos un poco más el valor del ángulo final, dejándolo en <b>1.1</b> crearíamos un semicírculo, pero un contorno menos extenso en su parte izquierda:<br>
+mi_dibujo.arc(100, 250, 45, 0, <b>Math.PI*1.1</b>, true);<br><br><br><br>
+
+<img id="im_67" src="img_html/isla4.PNG" align="center">
+Por el contrario, si con un ángulo final en <b>1</b>, modificamos el ángulo inicial dejándolo en  <b>-0.3</b>, podemos ver cómo el semicirculo se recorta por el lado contrario.<br>
+mi_dibujo.arc(100, 250, 45, <b>-0.3</b>, <b>Math.PI*1</b>, true);<br><br><br><br>
+
+<img id="im_67" src="img_html/isla5.PNG" align="center">
+Por lo tanto, si recortamos del lado derecho con <b>-0.3</b> en el ángulo inicial y recortamos también por el lado izquierdo con <b>1.1</b> en el ángulo final, tenemos el resultado final:<br>
+mi_dibujo.arc(100, 250, 45, <b>-0.3</b>, <b>Math.PI*1.1</b>, true);<br><br><br>
+
+<p id="punto3"></p>
+<div id="titulillo">
+Otras etiquetas...
+</div>
+Existen muchas otras etiquetas que aportan más posibilidades a la herramientas CANVAS, como son:<p>
+<dd>
+<b>strokeRect (x, y, ancho, alto)</b>: Dibuja un contorno rectangular (sin relleno).<p>
+<b>createRadialGradient (x1, y1, radio1, x2, y2, radio2)</b>: crea un degradado de tipo circular especificando el círculo de inicio y el círculo que limitará el degradado. Osea, el degradado se aplicará en el área que esté comprendida entre el primer y segundo círculo).<p>
+<b>clearRect (x, y, ancho, alto)</b>: Borra una zona especificada y hace que ésta sea totalmente transparente.<p>
+<b>lineWidth = grosor</b>: Establece el grosor de las lineas (por defecto es 1).</p>
+<b>lineCap (tipo)</b>: Determina el aspecto de los extremos de las líneas (puede ser 'butt' (normal), 'round' (final redondeado) o 'square' (extremo cuadrado)).<p>
+<b>globalAlpha</b>: Establece un nivel de transparencia (de 0-1).<p>
+
+<b>quadraticCurveTo (x del punto de control, y del punto de control, x del punto final, y del punto final)</b>: Dibuja curvas cuadráticas de Bezier (con un solo punto de control enmedio que define el ángulo de la curva).<p>
+<b>bezierCurveTo (x del punto de control 1, y del punto de control 1, x del punto de control 2, y del punto de control 2, x, y)</b>: Dibuja curvas cúbicas de Bézier (utilizan dos puntos de control para definir el ángulo de la curva).<p>
+</dd>
+
+Para más información es muy positivo (aunque poco sano para la salud mental) visitar <a href="http://www.html5canvastutorials.com/" target="_blank">www.html5canvastutorials.com</a>
+</section>
+</body>
+</html>
+<script type="text/javascript">
+var hoja=document.getElementById("mi_lienzo");
+
+/* cielo (rectangulo azul) */
+var mi_dibujo=hoja.getContext("2d");
+mi_dibujo.fillStyle="#B5CDFF";
+mi_dibujo.fillRect(0,0,500,300);
+
+/* sol */		               
+mi_dibujo.fillStyle="#F8FF5A";
+mi_dibujo.beginPath();
+mi_dibujo.arc(290,130,54,0,Math.PI*2,true);
+mi_dibujo.closePath;
+mi_dibujo.fill();
+
+/* nubes (arc) */
+mi_dibujo.fillStyle="rgba(232,236,247,0.5)";
+mi_dibujo.beginPath();
+mi_dibujo.arc(10,200,80,0,Math.PI*2, true);
+mi_dibujo.arc(88,220,46,0,Math.PI*2, true);
+mi_dibujo.arc(154,199,30,0,Math.PI*2, true);
+mi_dibujo.arc(232,210,62,0,Math.PI*2, true);
+mi_dibujo.arc(320,205,25,0,Math.PI*2, true);
+mi_dibujo.arc(380,200,44,0,Math.PI*2, true);
+mi_dibujo.arc(442,208,23,0,Math.PI*2, true);
+mi_dibujo.arc(498,200,41,0,Math.PI*2, true);
+mi_dibujo.closePath;
+mi_dibujo.fill();
+
+/* mar (rectangulo con gradient) */
+var gradiente=mi_dibujo.createLinearGradient(0,200,0,280);
+gradiente.addColorStop(0,"#D3DEF3");
+gradiente.addColorStop(1,"#0628A4");
+mi_dibujo.fillStyle=gradiente;
+mi_dibujo.fillRect(0,200,500,300);
+
+/* barquito */
+mi_dibujo.beginPath();
+mi_dibujo.fillStyle="#656652";
+mi_dibujo.strokeStyle="#3C3F09"
+mi_dibujo.moveTo(300,219);
+mi_dibujo.lineTo(360,219);
+mi_dibujo.lineTo(368,203);
+mi_dibujo.lineTo(296,206);
+mi_dibujo.lineTo(300,219);
+mi_dibujo.closePath;
+mi_dibujo.stroke();
+mi_dibujo.fill();
+
+/* isla */
+mi_dibujo.fillStyle="#2E7B10";
+mi_dibujo.beginPath();
+mi_dibujo.arc(100,250,45,-0.3,Math.PI*1.1, true);
+mi_dibujo.arc(135,246,33,-0.3,Math.PI*1.1, true);
+mi_dibujo.closePath;
+mi_dibujo.fill();
+
+/* quilla del barco */
+mi_dibujo.beginPath();
+mi_dibujo.fillStyle="#3C3F09";
+mi_dibujo.beginPath();
+mi_dibujo.moveTo(300,219);
+mi_dibujo.lineTo(360,219);
+mi_dibujo.lineTo(364,212);
+mi_dibujo.lineTo(298,214);
+mi_dibujo.lineTo(300,219);
+mi_dibujo.fill();
+
+/* mastil */
+mi_dibujo.fillStyle="#867048";
+mi_dibujo.beginPath();
+mi_dibujo.moveTo(314,205);
+mi_dibujo.lineTo(330,101);
+mi_dibujo.lineTo(334,103);
+mi_dibujo.lineTo(322,204);
+mi_dibujo.fill();
+
+/* vela */
+mi_dibujo.fillStyle="rgba(210,151,50,0.6)";
+mi_dibujo.beginPath();
+mi_dibujo.moveTo(333,105);
+mi_dibujo.lineTo(378,194);
+mi_dibujo.lineTo(322,188);
+mi_dibujo.lineTo(333,105);
+mi_dibujo.closePath;
+mi_dibujo.fill();
+</script>
+
+<footer>
+	<div id="texto_footer"><br>&#169; Javier López (2015-2019)<br>
+	<a href="mailto:jab@jabmultimedia.com"> <img src="img_html/email.png" align="center"> jab@jabmultimedia.com</a></li>
+	HTML6.es / JAB Multimedia, S.L.
+	<a href="#"><div id="flecha_azul"><img src="img_html/flecha_fondo.png"></div></a>
+</div>
+</footer>
+
+</body>
+</html>
